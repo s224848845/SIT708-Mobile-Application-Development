@@ -95,7 +95,11 @@ Repository Link:
 ---
 
 ## LLM Usage Declaration
-This project was developed based on knowledge gained from workshops and subject materials. AI tools were used to support understanding of concepts and improve explanation structure where necessary. 
+This project was developed based on knowledge gained from workshops, lectures, and subject materials. Generative AI tools, including ChatGPT and built-in Gemini features, were used as supplementary aids to support understanding of concepts and assist in debugging and resolving coding errors during development.
+
+AI tools were used only for guidance, clarification, and improvement of explanation structure, and not as a substitute for learning or implementation. All application design, coding, testing, and validation were completed independently by the student.
+
+The final submission reflects the student’s own understanding and application of the concepts covered in the unit.
 
 ---
 
