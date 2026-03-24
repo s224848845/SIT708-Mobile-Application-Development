@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Root layout using ConstraintLayout for flexible and responsive UI design with Light background for modern UI look -->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F7FB"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+
+    <!-- App icon displayed at the top center -->
+    <ImageView
+        android:id="@+id/appIcon"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="12dp"
+        android:contentDescription="Travel icon"
+        android:src="@drawable/ic_travel"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Main title of the application -->
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:text="Travel Companion App"
+        android:textColor="#1E3A8A"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/appIcon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Subtitle describing app purpose -->
+    <TextView
+        android:id="@+id/subTitleText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:gravity="center"
+        android:text="Quick conversions for travel essentials"
+        android:textColor="#64748B"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/titleText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Main CardView container for user inputs -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/mainCard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:cardBackgroundColor="#FFFFFF"
+        app:cardCornerRadius="18dp"
+        app:cardElevation="8dp"
+        app:layout_constraintTop_toBottomOf="@id/subTitleText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Vertical layout to arrange input fields -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Category label -->
+            <TextView
+                android:id="@+id/categoryLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Category"
+                android:textColor="#0F172A"
+                android:textStyle="bold" />
+
+            <!-- Spinner for selecting conversion category -->
+            <Spinner
+                android:id="@+id/categorySpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" />
+
+            <!-- Source unit label -->
+            <TextView
+                android:id="@+id/fromLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="From"
+                android:textColor="#0F172A"
+                android:textStyle="bold" />
+
+            <!-- Spinner for selecting source unit -->
+            <Spinner
+                android:id="@+id/fromSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" />
+
+            <!-- Destination unit label -->
+            <TextView
+                android:id="@+id/toLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="To"
+                android:textColor="#0F172A"
+                android:textStyle="bold" />
+
+            <!-- Spinner for selecting destination unit -->
+            <Spinner
+                android:id="@+id/toSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" />
+
+            <!-- Input label -->
+            <TextView
+                android:id="@+id/inputLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Enter Value"
+                android:textColor="#0F172A"
+                android:textStyle="bold" />
+
+            <!-- Input field for numeric value -->
+            <EditText
+                android:id="@+id/inputValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/edittext_bg"
+                android:hint="Enter value"
+                android:inputType="numberDecimal|numberSigned"
+                android:padding="14dp"
+                android:textColor="#0F172A"
+                android:textColorHint="#94A3B8" />
+
+            <!-- Horizontal layout for Convert and Reset buttons -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <!-- Convert button triggers conversion logic -->
+                <Button
+                    android:id="@+id/convertButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#2563EB"
+                    android:text="Convert"
+                    android:textColor="#FFFFFF" />
+
+                <!-- Reset button clears inputs and resets UI -->
+                <Button
+                    android:id="@+id/resetButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#CBD5E1"
+                    android:text="Reset"
+                    android:textColor="#0F172A" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Result CardView to display conversion output -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/resultCard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        app:cardBackgroundColor="#DBEAFE"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp"
+        app:layout_constraintTop_toBottomOf="@id/mainCard"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Layout inside result card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="18dp">
+
+            <!-- Result section label -->
+            <TextView
+                android:id="@+id/resultLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Conversion Result"
+                android:textColor="#1E3A8A"
+                android:textStyle="bold" />
+
+            <!-- Display converted value -->
+            <TextView
+                android:id="@+id/resultText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="Result will appear here"
+                android:textColor="#0F172A"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
