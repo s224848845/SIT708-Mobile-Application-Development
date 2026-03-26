@@ -82,15 +82,14 @@ Additionally, view animation is used to enhance user experience by smoothly disp
 
 ---
 
-## Demo Video
-YouTube Link:  
-
+## Demo Video Link:  
+https://deakin365-my.sharepoint.com/:v:/g/personal/s224848845_deakin_edu_au/IQB4P_E7tg--T6myevtKiTs1Ab91Ax5__Xn7Xuriwv0KHPQ?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=MdURAv
 
 ---
 
 ## GitHub Repository
 Repository Link:  
-
+https://github.com/s224848845/SIT708-Mobile-Application-Development/tree/main/Task_2.1P-Travel_Companion_App
 
 ---
 
