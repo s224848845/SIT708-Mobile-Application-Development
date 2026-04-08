@@ -134,7 +134,7 @@ All implementation, testing, and final submission were completed independently i
 ---
 
 ## 🔗 Repository Link
-GitHub Repository: 
+GitHub Repository: https://github.com/s224848845/SIT708-Mobile-Application-Development/tree/main/Task_4.1P-Personal_Event_Planner_App
 
 ---
 
