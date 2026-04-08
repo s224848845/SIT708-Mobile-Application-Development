@@ -89,7 +89,7 @@ Task_4.1P-Personal_Event_Planner_App/
 ## ▶️ How to Run the App
 
 1. Clone the repository:
-   git clone https://github.com/<your-username>/SIT708-Mobile-Application-Development.git
+   git clone https://github.com/s224848845/SIT708-Mobile-Application-Development/tree/main/Task_4.1P-Personal_Event_Planner_App
 
 2. Open the project in Android Studio
 
