@@ -1,187 +1,248 @@
-LLM-Enhanced Learning Assistant App
+# LLM-Enhanced Learning Assistant App
 
-Overview
+## Introduction
 
-This App is an Android-based learning assistant application developed for SIT708 Task 6.1D. The app demonstrates how Large Language Model (LLM) concepts can be integrated into a mobile learning environment to support personalised learning, adaptive assessments, and intelligent tutoring.
+This App is an Android mobile application developed for SIT708 Task 6.1D. The aim of this project is to demonstrate how AI (Large Language Model concepts) can be integrated into a learning application to support students in understanding topics more effectively.
 
-The application allows users to register, select learning interests, attempt quizzes generated via a backend API, and receive AI-supported hints and explanations to improve understanding.
+The app allows users to create an account, select their learning interests, attempt quizzes, and receive AI-style hints and explanations to improve their understanding.
 
-Key Features
-1. User Authentication
-Login and registration system
-Local session management using SharedPreferences
-2. Interest-Based Personalisation
-Users select learning interests (e.g., Algorithms, Data Structures)
-Dashboard generates tasks based on selected interests
-3. Backend Quiz Generation
-Quiz questions are fetched from the provided Flask backend API
-Endpoint used:
+---
+
+## Application Features
+
+### 1. Login and Registration
+
+The app includes a simple login and registration system where users can:
+- Create an account by entering basic details
+- Log in using a username and password
+- Store user information locally using SharedPreferences
+
+---
+
+### 2. Interest Selection
+
+After registration, users select their learning interests such as:
+- Algorithms
+- Data Structures
+- Web Development
+- Testing
+- Databases
+
+These interests are used to personalise the learning experience.
+
+---
+
+### 3. Home Dashboard
+
+The home screen displays:
+- A welcome message with the user’s name
+- A generated learning task based on selected interests
+- A button to start the quiz
+
+---
+
+### 4. Quiz Feature (Backend Integration)
+
+The quiz questions are fetched from the provided backend API using Retrofit.
+
+API used:
 GET /getQuiz?topic={topic}
-Retrofit is used for API communication
-4. LLM-Enhanced Learning Utilities
-Generate Hint
-Available in Quiz screen
-Provides guidance without revealing the answer
-Displays both prompt and response
 
-Example Prompt:
+If the backend is not available or returns empty data, the app automatically loads a fallback demo quiz to ensure the application continues to work.
+
+---
+
+### 5. AI Learning Support (LLM Features)
+
+This application includes two AI-supported learning features as required by the task.
+
+#### a) Generate Hint
+
+Users can tap the **"Generate Hint"** button during a quiz.
+
+The app:
+- Creates a learning prompt based on the current question
+- Displays the prompt in the UI
+- Shows a helpful hint response
+
+Example:
+
+Prompt:
 Generate a short study hint for this question without revealing the final answer.
-Question: Which data structure follows FIFO order?
-Options: [Stack, Queue, Tree, Graph]
 
-Example Response:
-Think about how elements are processed in order. FIFO means the first element added is the first removed.
+Response:
+Think about how the concept works and eliminate incorrect options first.
 
-Explain Answer
-Available in Results screen
-Explains why an answer is correct or incorrect
-Displays both prompt and response
+---
 
-Example Prompt:
-Explain in simple student-friendly language why the selected answer is correct or incorrect.
-Question: Which data structure follows FIFO order?
-Selected Answer: Stack
-Correct Answer: Queue
+#### b) Explain Answer
 
-Example Response:
-Your answer is incorrect because a stack follows LIFO order. A queue follows FIFO, where the first element added is removed first.
+After completing the quiz, users can tap **"Explain First Answer"**.
 
-5. Fallback Learning Mode
-If backend fails, demo quiz questions are loaded
-Ensures the app remains functional during testing and demonstration
-6. Clean UI and Navigation
-Readable layout and consistent design
-Clear button labels
-Proper navigation flow
-Loading indicators and error handling
-Screens
-Login Screen
-Register / Setup Screen
-Interests Selection Screen
-Home Dashboard
-Quiz Screen
-Results Screen
-Backend Integration
+The app:
+- Builds a prompt using the selected and correct answers
+- Displays the prompt in the UI
+- Shows an explanation to help the student understand the concept
 
-Backend runs locally using Flask:
+Example:
 
+Prompt:
+Explain why the selected answer is incorrect.
+
+Response:
+The selected answer does not follow the correct concept. The correct answer aligns with the expected behaviour of the data structure.
+
+---
+
+### 6. Results Screen
+
+The results screen shows:
+- Total score
+- Summary message
+- Option to generate explanation
+- Continue button to return to home screen
+
+---
+
+### 7. Navigation
+
+The app includes proper navigation:
+- Login → Register → Interests → Home → Quiz → Results → Home
+- Back button works correctly
+- Logout returns to login screen
+
+---
+
+## Technical Implementation
+
+### Technologies Used
+
+- Android Studio (Java)
+- XML layouts
+- Retrofit (API communication)
+- Gson (JSON parsing)
+- SharedPreferences (local storage)
+
+---
+
+### Backend Configuration
+
+The backend runs locally using Flask.
+
+Backend URL:
 http://localhost:5000/
 
-Android emulator connects via:
-
+For Android Emulator:
 http://10.0.2.2:5000/
 
-Retrofit Base URL:
+---
 
-private static final String BASE_URL = "http://10.0.2.2:5000/
-";
-
-Project Structure
-
-app/src/main/java/com/example/llm_enhancedlearningassistantapp/
+### Project Structure
 
 activities/
-LoginActivity.java
-RegisterActivity.java
-InterestsActivity.java
-HomeActivity.java
-QuizActivity.java
-ResultActivity.java
-
-adapters/
-InterestAdapter.java
-
-data/
-DummyDataProvider.java
+- LoginActivity
+- RegisterActivity
+- InterestsActivity
+- HomeActivity
+- QuizActivity
+- ResultActivity
 
 llm/
-LocalLearningAssistant.java
-PromptBuilder.java
+- PromptBuilder
+- LocalLearningAssistant
 
 models/
-Interest.java
-QuizApiResponse.java
-QuizQuestion.java
-UserSession.java
+- QuizQuestion
+- QuizApiResponse
+- Interest
 
 network/
-ApiService.java
-RetrofitClient.java
+- ApiService
+- RetrofitClient
 
 utils/
-PrefManager.java
-ValidationUtils.java
+- PrefManager
+- ValidationUtils
 
-Setup Instructions
-Clone the repository
-git clone YOUR_REPO_LINK
-Open in Android Studio
-Open project folder
-Sync Gradle
-Run Backend API
-python main.py
-Run the App
-Start Android emulator
-Click Run in Android Studio
-How to Use
-Register a new account
-Select interests
-Go to Home dashboard
-Start quiz
-Answer questions
-Use "Generate Hint"
-Submit quiz
-View results
-Use "Explain Answer"
-Continue learning or logout
-Testing Checklist
-Login and registration works
-Interest selection required
-Dashboard shows selected topic
-Quiz loads from backend
-Fallback quiz loads if backend fails
-Hint button works
-Prompt + response displayed
-Submit works correctly
-Score calculation correct
-Explanation button works
-Navigation works
-Logout works
-Permissions
+---
 
-INTERNET
-ACCESS_NETWORK_STATE
+## How to Run the App
 
-Network Configuration
+1. Open the project in Android Studio
+2. Sync Gradle
+3. Start the backend server (python main.py)
+4. Run the app on emulator or device
 
-res/xml/network_security_config.xml
+---
 
-Allows HTTP access to local backend during development.
+## How to Use the App
 
-Known Limitations
-Login is local (no secure authentication server)
-AI responses are simulated (not real LLM API)
-Only first question explanation is shown
-Backend reliability depends on API
-Future Improvements
-Real LLM API integration (OpenAI, Gemini)
-Explanation for all questions
-Flashcards and summaries
-Study plan generation
-Persistent cloud storage
-Improved UI and animations
-Responsible Use of AI
+1. Register a new account
+2. Select your interests
+3. Open the dashboard
+4. Start the quiz
+5. Answer questions
+6. Use "Generate Hint" if needed
+7. Submit the quiz
+8. View results
+9. Use "Explain Answer"
+10. Continue learning
 
-AI tools were used to assist with:
+---
 
-understanding task requirements
-designing app architecture
-structuring code and debugging guidance
-improving documentation
+## Testing Summary
 
-All development, implementation, testing, and debugging were completed by the student. AI was used only as a support tool.
+The following functionalities were tested:
 
-Author
+- User registration and login
+- Interest selection validation
+- Dashboard loading
+- Quiz loading from backend
+- Fallback quiz loading
+- Answer selection and navigation
+- Hint generation
+- Explanation generation
+- Score calculation
+- Navigation between screens
+- Logout functionality
+
+---
+
+## Limitations
+
+- Login system uses local storage only
+- AI responses are simulated (not real LLM API)
+- Only the first question explanation is shown
+- Backend reliability depends on API
+
+---
+
+## Future Improvements
+
+- Integrate real LLM APIs (OpenAI / Gemini)
+- Add explanations for all questions
+- Add flashcards and summaries
+- Add study plan generation
+- Improve UI with animations
+
+---
+
+## AI Usage Declaration
+
+AI tools were used to assist in:
+- understanding the task requirements
+- designing the app structure
+- generating code guidance
+- improving documentation
+
+All implementation, testing, and debugging were completed by the student.
+
+---
+
+## Author
 
 Name: Ashan Indika Wijayarathne Hewayalage
 Student ID: 224848845
+
+
+
