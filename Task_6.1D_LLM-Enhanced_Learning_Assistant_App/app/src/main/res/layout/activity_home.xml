@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F9FF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvWelcome"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Hello, Student"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:textColor="#111111" />
+
+            <ImageButton
+                android:id="@+id/btnLogout"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@android:color/transparent"
+                android:src="@android:drawable/ic_lock_power_off"
+                android:contentDescription="Logout" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your AI-supported learning dashboard"
+            android:textSize="16sp"
+            android:textColor="#616161"
+            android:layout_marginTop="6dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="18dp"
+            android:layout_marginTop="20dp"
+            android:background="#1565C0">
+
+            <TextView
+                android:id="@+id/tvTopic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Generated Task"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/tvDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Task description"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"
+                android:layout_marginTop="10dp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnStartQuiz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Start Quiz"
+            android:textStyle="bold"
+            android:layout_marginTop="22dp"
+            android:backgroundTint="#00C853" />
+
+    </LinearLayout>
+</ScrollView>
