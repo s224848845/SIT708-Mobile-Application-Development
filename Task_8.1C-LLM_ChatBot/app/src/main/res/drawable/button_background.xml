@@ -1,0 +1,5 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Green rounded button matching the sample login screen. -->
+    <solid android:color="@color/green_button" />
+    <corners android:radius="8dp" />
+</shape>
