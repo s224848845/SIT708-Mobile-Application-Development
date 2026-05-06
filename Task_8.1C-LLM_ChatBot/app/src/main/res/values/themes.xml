@@ -1,0 +1,8 @@
+<resources>
+    <style name="Theme.LLMChatBot" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:fontFamily">sans</item>
+        <item name="android:statusBarColor">@color/blue_end</item>
+        <item name="android:navigationBarColor">@color/blue_end</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>

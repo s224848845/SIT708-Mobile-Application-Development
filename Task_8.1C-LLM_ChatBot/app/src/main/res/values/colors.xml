@@ -1,0 +1,9 @@
+<resources>
+    <color name="blue_start">#28C6F7</color>
+    <color name="blue_end">#0984E3</color>
+    <color name="green_button">#00E676</color>
+    <color name="user_bubble">#D9FDD3</color>
+    <color name="bot_bubble">#FFFFFF</color>
+    <color name="dark_text">#111111</color>
+    <color name="grey_text">#666666</color>
+</resources>
