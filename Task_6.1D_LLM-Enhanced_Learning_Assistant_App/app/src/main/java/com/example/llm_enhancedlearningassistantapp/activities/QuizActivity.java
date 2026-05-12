@@ -221,7 +221,7 @@ public class QuizActivity extends AppCompatActivity {
         tvResponse.setText("Generating hint...");
 
         // Displays both the prompt and returned learning support text in the UI.
-        assistant.generateHint(question, new LocalLearningAssistant.Callback() {
+        assistant.generateHint(question, new LocalLearningAssistant.CallbackResult() {
             @Override
             public void onSuccess(String prompt, String response) {
                 progressBar.setVisibility(View.GONE);

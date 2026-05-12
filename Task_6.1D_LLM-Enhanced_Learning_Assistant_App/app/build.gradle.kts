@@ -29,6 +29,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+    buildToolsVersion = "36.0.0"
 }
 
 dependencies {
@@ -36,10 +37,14 @@ dependencies {
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
     
     // Retrofit dependencies
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
+
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
