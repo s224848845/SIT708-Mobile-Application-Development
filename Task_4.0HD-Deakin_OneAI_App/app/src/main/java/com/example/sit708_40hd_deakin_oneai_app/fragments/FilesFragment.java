@@ -14,7 +14,6 @@ import com.example.sit708_40hd_deakin_oneai_app.R;
 
 /**
  * FilesFragment is the local academic storage area.
- * This is a simple starter version for Task 4.0.
  */
 public class FilesFragment extends Fragment {
 

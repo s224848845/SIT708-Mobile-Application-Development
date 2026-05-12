@@ -4,8 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,59 +13,166 @@ import androidx.fragment.app.Fragment;
 import com.example.sit708_40hd_deakin_oneai_app.R;
 
 /**
- * DeakinFragment is used to load different Deakin services in a WebView.
- * The requested portal name is passed through fragment arguments.
+ * Deakin Hub.
+ *
+ * Features:
+ * - Opens Deakin services inside the app
+ * - Browser workspace
+ * - GitHub workspace
+ * - Local study files module
+ *
+ * Security Note:
+ * This prototype demonstrates integrated academic access.
+ * Users are warned not to enter sensitive credentials
+ * inside embedded WebViews in production systems.
  */
 public class DeakinFragment extends Fragment {
 
-    private static final String ARG_PORTAL = "portal";
-
     public DeakinFragment() {
-        // Required empty constructor
+        // Required empty constructor.
     }
 
-    public static DeakinFragment newInstance(String portal) {
-        DeakinFragment fragment = new DeakinFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PORTAL, portal);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_deakin, container, false);
-    }
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+        View view = inflater.inflate(R.layout.fragment_deakin, container, false);
 
-        WebView webView = view.findViewById(R.id.webView);
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.setWebViewClient(new WebViewClient());
+        // =========================
+        // Resource cards
+        // =========================
 
-        String portal = getArguments() != null ? getArguments().getString(ARG_PORTAL, "clouddeakin") : "clouddeakin";
-        webView.loadUrl(getPortalUrl(portal));
+        LinearLayout cardCloudDeakin =
+                view.findViewById(R.id.cardCloudDeakin);
+
+        LinearLayout cardOnTrack =
+                view.findViewById(R.id.cardOnTrack);
+
+        LinearLayout cardStudentConnect =
+                view.findViewById(R.id.cardStudentConnect);
+
+        LinearLayout cardDeakinSync =
+                view.findViewById(R.id.cardDeakinSync);
+
+        LinearLayout cardStarTimetable =
+                view.findViewById(R.id.cardStarTimetable);
+
+        LinearLayout cardGithub =
+                view.findViewById(R.id.cardGithub);
+
+        LinearLayout cardBrowser =
+                view.findViewById(R.id.cardBrowser);
+
+        LinearLayout cardFiles =
+                view.findViewById(R.id.cardFiles);
+
+        LinearLayout cardCalendar =
+                view.findViewById(R.id.cardCalendar);
+
+        // =========================
+        // Deakin resources
+        // =========================
+
+        cardCloudDeakin.setOnClickListener(v ->
+                openInAppBrowser(
+                        "CloudDeakin",
+                        "https://d2l.deakin.edu.au/"
+                )
+        );
+
+        cardOnTrack.setOnClickListener(v ->
+                openInAppBrowser(
+                        "OnTrack",
+                        "https://ontrack.deakin.edu.au/"
+                )
+        );
+
+        cardStudentConnect.setOnClickListener(v ->
+                openInAppBrowser(
+                        "StudentConnect",
+                        "https://studentconnect.deakin.edu.au/"
+                )
+        );
+
+        cardDeakinSync.setOnClickListener(v ->
+                openInAppBrowser(
+                        "DeakinSync",
+                        "https://sync.deakin.edu.au/"
+                )
+        );
+
+        cardStarTimetable.setOnClickListener(v ->
+                openInAppBrowser(
+                        "STAR Timetable",
+                        "https://www.deakin.edu.au/students/study-support/study-timetables"
+                )
+        );
+
+        // =========================
+        // Developer workspace
+        // =========================
+
+        cardGithub.setOnClickListener(v ->
+                openInAppBrowser(
+                        "GitHub Workspace",
+                        "https://github.com/ashanindika3737"
+                )
+        );
+
+        cardBrowser.setOnClickListener(v ->
+                openInAppBrowser(
+                        "Browser Workspace",
+                        "https://www.google.com/search?q=Android+Gemini+API+student+productivity+app"
+                )
+        );
+
+        // =========================
+        // Productivity Tools
+        // =========================
+
+        cardCalendar.setOnClickListener(v ->
+                openInAppFragment(new CalendarFragment())
+        );
+
+        // =========================
+        // Local files section
+        // =========================
+
+        cardFiles.setOnClickListener(v ->
+                openInAppFragment(new FilesFragment())
+        );
+
+        return view;
     }
 
     /**
-     * Returns the relevant URL for each Deakin portal.
+     * Opens BrowserFragment inside the app.
      */
-    private String getPortalUrl(String portal) {
-        switch (portal) {
-            case "deakinsync":
-                return "https://sync.deakin.edu.au/home";
-            case "studentconnect":
-                return "https://www.deakin.edu.au/students/help/it-support-and-systems/studentconnect";
-            case "ontrack":
-                return "https://ontrack.deakin.edu.au/home";
-            case "timetable":
-                return "https://www.deakin.edu.au/students/study-support/study-timetables";
-            case "clouddeakin":
-            default:
-                return "https://d2l.deakin.edu.au/d2l/home";
-        }
+    private void openInAppBrowser(String title, String url) {
+
+        BrowserFragment fragment =
+                BrowserFragment.newInstance(title, url);
+
+        requireActivity()
+                .getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    /**
+     * Opens a normal fragment inside the app.
+     */
+    private void openInAppFragment(Fragment fragment) {
+
+        requireActivity()
+                .getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
+                .commit();
     }
 }

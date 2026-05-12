@@ -1,58 +1,181 @@
 package com.example.sit708_40hd_deakin_oneai_app.fragments;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.sit708_40hd_deakin_oneai_app.R;
-import com.example.sit708_40hd_deakin_oneai_app.ai.AIEngine;
+import com.example.sit708_40hd_deakin_oneai_app.ai.GeminiService;
 
 /**
- * AIFragment handles UI only.
- * Logic is delegated to AIEngine.
+ * OneAI Studio screen.
+ *
+ * Provides a user-friendly Gemini response view with:
+ * - readable response card
+ * - copy response action
+ * - clear response action
+ * - auto-scroll to generated answer
  */
 public class AIFragment extends Fragment {
 
-    private AIEngine aiEngine;
+    private EditText inputPrompt;
+    private TextView outputResponse;
+    private TextView txtResponseTitle;
+    private TextView txtResponseMeta;
+    private ProgressBar progressGemini;
+    private ScrollView aiRootScroll;
+
+    private GeminiService geminiService;
+    private String latestResponse = "";
 
     public AIFragment() {
-        // Required empty constructor
+        // Required empty public constructor.
     }
 
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_ai, container, false);
 
-        EditText inputText = view.findViewById(R.id.inputText);
-        Button askButton = view.findViewById(R.id.askButton);
-        TextView responseText = view.findViewById(R.id.responseText);
+        geminiService = new GeminiService();
 
-        aiEngine = new AIEngine();
+        aiRootScroll = view.findViewById(R.id.aiRootScroll);
+        inputPrompt = view.findViewById(R.id.inputPrompt);
+        outputResponse = view.findViewById(R.id.outputResponse);
+        txtResponseTitle = view.findViewById(R.id.txtResponseTitle);
+        txtResponseMeta = view.findViewById(R.id.txtResponseMeta);
+        progressGemini = view.findViewById(R.id.progressGemini);
 
-        askButton.setOnClickListener(v -> {
+        Button btnAsk = view.findViewById(R.id.btnAsk);
+        Button btnSummarise = view.findViewById(R.id.btnSummarise);
+        Button btnPlan = view.findViewById(R.id.btnPlan);
+        Button btnChecklist = view.findViewById(R.id.btnChecklist);
+        Button btnExplain = view.findViewById(R.id.btnExplain);
+        Button btnFlashcards = view.findViewById(R.id.btnFlashcards);
+        Button btnCopyResponse = view.findViewById(R.id.btnCopyResponse);
+        Button btnClearResponse = view.findViewById(R.id.btnClearResponse);
 
-            String userInput = inputText.getText().toString().trim();
+        outputResponse.setMovementMethod(new ScrollingMovementMethod());
 
-            if (TextUtils.isEmpty(userInput)) {
-                responseText.setText("Please enter a question.");
-                return;
-            }
+        btnAsk.setOnClickListener(v -> runGemini("ASK", "General Answer"));
+        btnSummarise.setOnClickListener(v -> runGemini("SUMMARY", "Lesson Summary"));
+        btnPlan.setOnClickListener(v -> runGemini("PLAN", "Study Plan"));
+        btnChecklist.setOnClickListener(v -> runGemini("CHECKLIST", "Assignment Checklist"));
+        btnExplain.setOnClickListener(v -> runGemini("EXPLAIN", "Concept Explanation"));
+        btnFlashcards.setOnClickListener(v -> runGemini("FLASHCARDS", "Revision Flashcards"));
 
-            // Call AIEngine
-            String result = aiEngine.generateResponse(userInput);
-
-            responseText.setText(result);
-        });
+        btnCopyResponse.setOnClickListener(v -> copyResponse());
+        btnClearResponse.setOnClickListener(v -> clearResponse());
 
         return view;
+    }
+
+    private void runGemini(String featureType, String displayTitle) {
+
+        String prompt = inputPrompt.getText().toString().trim();
+
+        if (TextUtils.isEmpty(prompt)) {
+            Toast.makeText(requireContext(), "Please enter a prompt first.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        progressGemini.setVisibility(View.VISIBLE);
+        txtResponseTitle.setText(displayTitle);
+        txtResponseMeta.setText("OneAI is thinking...");
+        outputResponse.setText("Generating a structured response. Please wait...");
+
+        scrollToResponse();
+
+        geminiService.generateLearningResponse(featureType, prompt, new GeminiService.GeminiCallback() {
+            @Override
+            public void onSuccess(String result) {
+                progressGemini.setVisibility(View.GONE);
+
+                latestResponse = cleanGeminiFormatting(result);
+
+                txtResponseTitle.setText(displayTitle);
+                txtResponseMeta.setText("Generated by Gemini AI for academic support.");
+                outputResponse.setText(latestResponse);
+
+                scrollToResponse();
+            }
+
+            @Override
+            public void onError(String error) {
+                progressGemini.setVisibility(View.GONE);
+
+                latestResponse = error;
+
+                txtResponseTitle.setText("AI Response Error");
+                txtResponseMeta.setText("Check API key, internet access, or model availability.");
+                outputResponse.setText(error);
+
+                scrollToResponse();
+            }
+        });
+    }
+
+    /**
+     * Makes Gemini output easier to read inside a TextView.
+     * This removes heavy markdown symbols while keeping structure.
+     */
+    private String cleanGeminiFormatting(String text) {
+        if (text == null) {
+            return "";
+        }
+
+        return text
+                .replace("###", "\n")
+                .replace("##", "\n")
+                .replace("**", "")
+                .replace("* ", "• ")
+                .replace("\n\n\n", "\n\n")
+                .trim();
+    }
+
+    private void copyResponse() {
+        if (TextUtils.isEmpty(latestResponse)) {
+            Toast.makeText(requireContext(), "No response to copy.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        ClipboardManager clipboardManager =
+                (ClipboardManager) requireContext().getSystemService(Context.CLIPBOARD_SERVICE);
+
+        ClipData clipData = ClipData.newPlainText("OneAI Response", latestResponse);
+        clipboardManager.setPrimaryClip(clipData);
+
+        Toast.makeText(requireContext(), "Response copied.", Toast.LENGTH_SHORT).show();
+    }
+
+    private void clearResponse() {
+        latestResponse = "";
+        txtResponseTitle.setText("OneAI Response");
+        txtResponseMeta.setText("Gemini output will appear below.");
+        outputResponse.setText("Start by entering a prompt and selecting one of the AI tools above.");
+    }
+
+    private void scrollToResponse() {
+        aiRootScroll.postDelayed(() ->
+                aiRootScroll.smoothScrollTo(0, outputResponse.getTop()), 250);
     }
 }
