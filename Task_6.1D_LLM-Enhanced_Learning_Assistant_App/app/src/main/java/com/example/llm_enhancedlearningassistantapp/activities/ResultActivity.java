@@ -68,7 +68,7 @@ public class ResultActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
         tvResponse.setText("Generating explanation...");
 
-        assistant.explainAnswer(question, new LocalLearningAssistant.Callback() {
+        assistant.explainAnswer(question, new LocalLearningAssistant.CallbackResult() {
             @Override
             public void onSuccess(String prompt, String response) {
                 progressBar.setVisibility(View.GONE);

@@ -1,49 +1,77 @@
 package com.example.llm_enhancedlearningassistantapp.llm;
 
-import android.os.Handler;
-import android.os.Looper;
-
+import com.example.llm_enhancedlearningassistantapp.models.LlmRequest;
+import com.example.llm_enhancedlearningassistantapp.models.LlmResponse;
 import com.example.llm_enhancedlearningassistantapp.models.QuizQuestion;
+import com.example.llm_enhancedlearningassistantapp.network.RetrofitClient;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LocalLearningAssistant {
 
-    // Callback allows the activity to update the UI after simulated processing.
-    public interface Callback {
+    public interface CallbackResult {
         void onSuccess(String prompt, String response);
         void onFailure(String prompt, String error);
     }
 
-    public void generateHint(QuizQuestion question, Callback callback) {
-        String prompt = PromptBuilder.buildHintPrompt(question);
+    public void generateHint(QuizQuestion question, CallbackResult callback) {
+        String fallbackPrompt = PromptBuilder.buildHintPrompt(question);
 
-        // Simulates processing time so loading states can be demonstrated in the UI.
-        new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            if (question.getQuestion() == null || question.getQuestion().trim().isEmpty()) {
-                callback.onFailure(prompt, "Unable to generate hint right now.");
-                return;
+        LlmRequest request = new LlmRequest(
+                question.getQuestion(),
+                question.getOptions()
+        );
+
+        RetrofitClient.getApiService().getHint(request).enqueue(new Callback<LlmResponse>() {
+            @Override
+            public void onResponse(Call<LlmResponse> call, Response<LlmResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    callback.onSuccess(response.body().getPrompt(), response.body().getResponse());
+                } else {
+                    callback.onFailure(fallbackPrompt, "LLM hint could not be generated. Please try again.");
+                }
             }
 
-            String response = "Think about the core concept being tested. Remove obviously wrong options first, then compare the remaining choices carefully.";
-            callback.onSuccess(prompt, response);
-        }, 1200);
+            @Override
+            public void onFailure(Call<LlmResponse> call, Throwable t) {
+                callback.onFailure(fallbackPrompt, "LLM backend error: " + t.getMessage());
+            }
+        });
     }
 
-    public void explainAnswer(QuizQuestion question, Callback callback) {
-        String prompt = PromptBuilder.buildExplanationPrompt(question);
+    public void explainAnswer(QuizQuestion question, CallbackResult callback) {
+        String fallbackPrompt = PromptBuilder.buildExplanationPrompt(question);
 
-        new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            if (question.getSelectedIndex() < 0) {
-                callback.onFailure(prompt, "No answer was selected, so an explanation cannot be generated.");
-                return;
+        String selectedAnswer = question.getSelectedIndex() >= 0
+                ? question.getOptions().get(question.getSelectedIndex())
+                : "No answer selected";
+
+        String correctAnswer = question.getCorrectIndex() >= 0
+                ? question.getOptions().get(question.getCorrectIndex())
+                : "Unknown";
+
+        LlmRequest request = new LlmRequest(
+                question.getQuestion(),
+                selectedAnswer,
+                correctAnswer
+        );
+
+        RetrofitClient.getApiService().explainAnswer(request).enqueue(new Callback<LlmResponse>() {
+            @Override
+            public void onResponse(Call<LlmResponse> call, Response<LlmResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    callback.onSuccess(response.body().getPrompt(), response.body().getResponse());
+                } else {
+                    callback.onFailure(fallbackPrompt, "LLM explanation could not be generated. Please try again.");
+                }
             }
 
-            String response;
-            if (question.isCorrect()) {
-                response = "Your answer is correct because it matches the expected concept tested by the question.";
-            } else {
-                response = "Your answer is incorrect because it does not match the correct concept. Review the differences between your selected option and the correct one.";
+            @Override
+            public void onFailure(Call<LlmResponse> call, Throwable t) {
+                callback.onFailure(fallbackPrompt, "LLM backend error: " + t.getMessage());
             }
-            callback.onSuccess(prompt, response);
-        }, 1200);
+        });
     }
 }
