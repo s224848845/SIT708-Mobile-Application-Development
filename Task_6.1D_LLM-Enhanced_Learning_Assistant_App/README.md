@@ -2,68 +2,121 @@
 
 ## Introduction
 
-This App is an Android mobile application developed for SIT708 Task 6.1D. The aim of this project is to demonstrate how AI (Large Language Model concepts) can be integrated into a learning application to support students in understanding topics more effectively.
+The LLM-Enhanced Learning Assistant App is an Android mobile learning application developed for SIT708 – Mobile Application Development (Task 6.1D). The purpose of this project is to demonstrate how Large Language Model (LLM) concepts can be integrated into a mobile learning environment to improve educational support and student engagement.
 
-The app allows users to create an account, select their learning interests, attempt quizzes, and receive AI-style hints and explanations to improve their understanding.
+The application combines Android frontend development with Python Flask backend integration to provide personalized quizzes, AI-assisted hints, and AI-generated answer explanations. The application focuses on learning enhancement rather than normal chatbot interaction.
+
+The frontend was developed using Java in Android Studio, while the backend APIs were implemented using Flask Python and integrated with a Llama-based model service structure provided in the T-6.1D backend resources.
 
 ---
 
 ## Application Features
 
-### 1. Login and Registration
+### 1. User Authentication
 
-The app includes a simple login and registration system where users can:
-- Create an account by entering basic details
-- Log in using a username and password
-- Store user information locally using SharedPreferences
+The application includes login and registration functionality.
+
+Features:
+
+- User registration
+- User login
+- Input validation
+- Local session persistence using SharedPreferences
+- Logout functionality
+
+The authentication system allows users to securely access personalized learning features within the application.
 
 ---
 
-### 2. Interest Selection
+### 2. Interest Selection System
 
-After registration, users select their learning interests such as:
+After registration, users can select preferred learning interests such as:
+
 - Algorithms
 - Data Structures
-- Web Development
-- Testing
 - Databases
+- Web Development
+- Mobile Development
+- Cloud Computing
+- Cybersecurity
+- Testing
 
-These interests are used to personalise the learning experience.
-
----
-
-### 3. Home Dashboard
-
-The home screen displays:
-- A welcome message with the user’s name
-- A generated learning task based on selected interests
-- A button to start the quiz
+These interests are used to personalize the quiz generation process and create an adaptive learning experience.
 
 ---
 
-### 4. Quiz Feature (Backend Integration)
+### 3. Personalized Learning Dashboard
 
-The quiz questions are fetched from the provided backend API using Retrofit.
+The Home screen acts as the main learning dashboard.
 
-API used:
-GET /getQuiz?topic={topic}
+Features:
 
-If the backend is not available or returns empty data, the app automatically loads a fallback demo quiz to ensure the application continues to work.
+- Personalized welcome message
+- Dynamically generated learning task
+- Quiz launch functionality
+- Navigation to learning activities
+
+The dashboard content changes according to the selected learning interests.
 
 ---
 
-### 5. AI Learning Support (LLM Features)
+### 4. Backend API Integration
 
-This application includes two AI-supported learning features as required by the task.
+The application integrates with a Flask backend using Retrofit API communication.
 
-#### a) Generate Hint
+Implemented API endpoints:
 
-Users can tap the **"Generate Hint"** button during a quiz.
+- GET /getQuiz
+- POST /getHint
+- POST /explainAnswer
+- GET /test
 
-The app:
-- Creates a learning prompt based on the current question
-- Displays the prompt in the UI
-- Shows a helpful hint response
+The Android application communicates with the backend through Retrofit and Gson JSON parsing.
+
+Backend URL for Android Emulator:
+http://10.0.2.2:5001/
+
+---
+
+### 5. Quiz Generation Feature
+
+Quiz questions are dynamically retrieved from the backend server based on the selected learning topic.
+
+Features:
+
+- Multiple-choice questions
+- Four answer options
+- Topic-based quiz generation
+- Dynamic question loading
+- Navigation between questions
+- Score calculation
+
+If the backend or external AI service becomes unavailable, the application automatically loads fallback educational content to maintain usability and prevent application crashes.
+
+---
+
+### 6. LLM-Powered Learning Utilities
+
+The application implements two LLM-powered learning utilities as required by the task sheet.
+
+---
+
+### A. Generate Hint for a Question
+
+The Quiz screen contains a "Generate Hint" feature.
+
+Workflow:
+
+1. The frontend sends the current question and options to the backend /getHint endpoint.
+2. The backend creates an educational learning prompt.
+3. The generated prompt is displayed in the UI.
+4. The learning hint response is displayed below the prompt.
+
+Purpose:
+
+- Encourage critical thinking
+- Guide the student without directly revealing answers
+- Improve concept understanding
 
 Example:
 
@@ -71,18 +124,26 @@ Prompt:
 Generate a short study hint for this question without revealing the final answer.
 
 Response:
-Think about how the concept works and eliminate incorrect options first.
+Focus on the main concept being tested and eliminate incorrect options first.
 
 ---
 
-#### b) Explain Answer
+### B. Explain Why an Answer is Correct or Incorrect
 
-After completing the quiz, users can tap **"Explain First Answer"**.
+The Result screen contains an "Explain First Answer" feature.
 
-The app:
-- Builds a prompt using the selected and correct answers
-- Displays the prompt in the UI
-- Shows an explanation to help the student understand the concept
+Workflow:
+
+1. The frontend sends the question, selected answer, and correct answer to the backend /explainAnswer endpoint.
+2. The backend builds a learning-oriented explanation prompt.
+3. The generated prompt is displayed in the UI.
+4. he educational explanation is displayed below the prompt.
+
+Purpose:
+
+- Reinforce learning concepts
+- Help students understand mistakes
+- Improve conceptual understanding
 
 Example:
 
@@ -90,52 +151,74 @@ Prompt:
 Explain why the selected answer is incorrect.
 
 Response:
-The selected answer does not follow the correct concept. The correct answer aligns with the expected behaviour of the data structure.
+The selected answer does not fully match the expected concept, while the correct answer follows the required behaviour of the data structure.
+---
+
+### 7. Prompt and Response Visualization
+
+The application displays:
+
+- Generated prompts
+- AI-generated responses
+- Educational explanations
+- Fallback learning responses
+
+This allows users to understand how the learning interaction is generated internally.
 
 ---
 
-### 6. Results Screen
+### 8. Loading and Failure Handling
 
-The results screen shows:
-- Total score
-- Summary message
-- Option to generate explanation
-- Continue button to return to home screen
+The application implements loading and failure-state handling mechanisms.
 
----
+Features:
 
-### 7. Navigation
+- Backend connection validation
+- Error message handling
+- Fallback educational responses
+- Stable navigation during API failures
 
-The app includes proper navigation:
-- Login → Register → Interests → Home → Quiz → Results → Home
-- Back button works correctly
-- Logout returns to login screen
+If the external LLM service is unavailable, the backend returns educational fallback responses instead of crashing the application.
 
 ---
+
+### 9. Navigation and User Experience
+
+The application follows consistent screen navigation.
+
+Navigation flow:
+Login → Register → Interests → Home → Quiz → Results → Home
+
+Features:
+
+- Back button support
+- Logout support
+- No dead-end screens
+- Readable text sizes
+- Meaningful button labels
+- User-friendly layouts
 
 ## Technical Implementation
 
-### Technologies Used
+### Frontend Technologies
 
-- Android Studio (Java)
-- XML layouts
-- Retrofit (API communication)
-- Gson (JSON parsing)
-- SharedPreferences (local storage)
-
----
-
-### Backend Configuration
-
-The backend runs locally using Flask.
-
-Backend URL:
-http://localhost:5000/
-
-For Android Emulator:
-http://10.0.2.2:5000/
+- Android Studio
+- Java
+- XML Layouts
+- RecyclerView
+- SharedPreferences
+- Retrofit
+- Gson
 
 ---
+
+### Backend Technologies
+
+- Python
+- Flask
+- GradientAI / Llama model structure
+- REST API endpoints
+
 
 ### Project Structure
 
@@ -155,6 +238,7 @@ models/
 - QuizQuestion
 - QuizApiResponse
 - Interest
+- UserSession
 
 network/
 - ApiService
@@ -164,6 +248,12 @@ utils/
 - PrefManager
 - ValidationUtils
 
+backend/
+
+- main.py
+- Flask API server
+- LLM endpoint handling
+
 ---
 
 ## How to Run the App
@@ -171,6 +261,20 @@ utils/
 1. Open the project in Android Studio
 2. Sync Gradle
 3. Start the backend server (python main.py)
+
+Open terminal inside backend folder.
+
+Activate virtual environment:
+
+Mac/Linux:
+source venv/bin/activate
+
+Run backend:
+python main.py
+
+Backend will run on:
+http://127.0.0.1:5001
+  
 4. Run the app on emulator or device
 
 ---
@@ -192,57 +296,48 @@ utils/
 
 ## Testing Summary
 
-The following functionalities were tested:
+The following features were tested successfully:
 
-- User registration and login
-- Interest selection validation
-- Dashboard loading
-- Quiz loading from backend
-- Fallback quiz loading
-- Answer selection and navigation
+- Registration validation
+- Login validation
+- Session persistence
+- Interest selection
+- Personalized dashboard
+- Backend API communication
+- Quiz retrieval
 - Hint generation
 - Explanation generation
+- Prompt display
+- Response display
+- Loading/failure handling
 - Score calculation
-- Navigation between screens
-- Logout functionality
+- Navigation flow
+-Logout functionality
 
 ---
 
 ## Limitations
 
-- Login system uses local storage only
-- AI responses are simulated (not real LLM API)
-- Only the first question explanation is shown
-- Backend reliability depends on API
+Current limitations include:
+
+- Backend hosted locally
+- External GradientAI service may become unavailable
+- Fallback educational responses used during API failures
+- Explanation currently demonstrated for first answer only
 
 ---
 
 ## Future Improvements
 
-- Integrate real LLM APIs (OpenAI / Gemini)
-- Add explanations for all questions
-- Add flashcards and summaries
-- Add study plan generation
-- Improve UI with animations
+Potential future enhancements include:
+
+- Real Gemini/OpenAI API integration
+- Firebase authentication
+- Cloud-hosted backend deployment
+- Improved UI animations and themes
 
 ---
 
-## AI Usage Declaration
-
-AI tools were used to assist in:
-- understanding the task requirements
-- designing the app structure
-- generating code guidance
-- improving documentation
-
-All implementation, testing, and debugging were completed by the student.
-
----
-
-## Author
-
-Name: Ashan Indika Wijayarathne Hewayalage
-Student ID: 224848845
 
 
 
