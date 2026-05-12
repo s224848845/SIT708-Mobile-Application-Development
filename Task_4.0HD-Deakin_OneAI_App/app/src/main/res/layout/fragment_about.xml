@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/screen_background"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="36dp"
+        android:paddingBottom="20dp">
+
+        <!-- Page title -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="About Deakin OneAI"
+            android:textColor="@color/text_primary"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <!-- App purpose -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="A Gemini-powered Android prototype designed to support study planning, academic productivity, and access to Deakin student services."
+            android:textColor="@color/text_secondary"
+            android:textSize="15sp" />
+
+        <!-- AI integration card -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_card"
+            android:padding="18dp"
+            android:text="AI Integration\n\nMode: Hybrid mobile + Gemini API\nModel: Gemini 2.0 Flash\nPurpose: Ask questions, summarise lessons, create study plans, generate assignment checklists, explain concepts, and create flashcards.\n\nThis satisfies the task requirement for a working prompt-to-response GenAI pipeline integrated into the mobile UI."
+            android:textColor="@color/text_primary"
+            android:textSize="15sp" />
+
+        <!-- Privacy card -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/bg_info_card"
+            android:padding="18dp"
+            android:text="Privacy Explanation\n\nThis prototype uses Gemini API in hybrid mode. User prompts are sent to Gemini for response generation. The app warns users not to enter passwords, student ID numbers, private documents, medical information, or sensitive personal data."
+            android:textColor="@color/info_text"
+            android:textSize="15sp" />
+
+        <!-- Safety card -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/bg_warning_card"
+            android:padding="18dp"
+            android:text="Safety Handling\n\nThe app includes local prompt checks before sending data to Gemini. Unsafe prompts related to malware, credential theft, phishing, bypassing login, or illegal activity are rejected with a safety notice."
+            android:textColor="@color/warning_text"
+            android:textSize="15sp" />
+
+        <!-- Compatibility card -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/bg_card"
+            android:padding="18dp"
+            android:text="Compatibility Evidence\n\ncompileSdk: API 36\nminimum target requirement: API 35 or higher\nCurrent targetSdk: API 36\nTesting evidence to capture: API 35 emulator/device and API 36 emulator/device screenshots.\n\nAndroid 16 Back Navigation: The app uses OnBackPressedDispatcher in MainActivity, which supports modern predictive-back compatible navigation behaviour."
+            android:textColor="@color/text_primary"
+            android:textSize="15sp" />
+
+        <!-- Future work card -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/bg_card"
+            android:padding="18dp"
+            android:text="Future Work\n\n• Add real user authentication\n• Add local note storage\n• Add offline AI fallback\n• Add Retrieval-Augmented Generation over local study notes\n• Add calendar reminders\n• Improve UI with Material 3 components\n• Add automated testing and accessibility checks"
+            android:textColor="@color/text_primary"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+</ScrollView>

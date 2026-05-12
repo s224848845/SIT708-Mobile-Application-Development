@@ -1,9 +1,11 @@
 <resources>
-    <string name="app_name">SIT708-4.0HD-Deakin-OneAI-App</string>
-    <string name="hint_ask_ai">Ask AI...</string>
-    <string name="button_ask">Ask</string>
-    <string name="response_placeholder">Response will appear here</string>
-    <string name="welcome_home">Welcome to OneAI Home</string>
-    <string name="files_fragment">Files Fragment</string>
-    <string name="schedule_fragment">Schedule Fragment</string>
+    <string name="app_name">Deakin OneAI</string>
+
+    <string name="home_title">Deakin OneAI</string>
+    <string name="home_subtitle">AI-powered student productivity assistant</string>
+
+    <string name="ai_title">OneAI Studio</string>
+    <string name="planner_title">Study Planner</string>
+    <string name="deakin_title">Deakin Hub</string>
+    <string name="about_title">About</string>
 </resources>

@@ -1,51 +1,84 @@
 package com.example.sit708_40hd_deakin_oneai_app.fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
-import androidx.cardview.widget.CardView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.sit708_40hd_deakin_oneai_app.R;
 
 /**
- * HomeFragment shows the dashboard cards for quick navigation.
+ * Home dashboard for Deakin OneAI.
+ *
+ * Includes:
+ * - Gemini AI quick actions
+ * - Study planner shortcut
+ * - Hub shortcut
+ * - Embedded Deakin latest news preview
  */
 public class HomeFragment extends Fragment {
 
+    private WebView webViewHomeNews;
+
     public HomeFragment() {
-        // Required empty constructor
+        // Required empty constructor.
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        CardView cardCloudDeakin = view.findViewById(R.id.cardCloudDeakin);
-        CardView cardDeakinSync = view.findViewById(R.id.cardDeakinSync);
-        CardView cardStudentConnect = view.findViewById(R.id.cardStudentConnect);
-        CardView cardOnTrack = view.findViewById(R.id.cardOnTrack);
-        CardView cardTimetable = view.findViewById(R.id.cardTimetable);
-        CardView cardFiles = view.findViewById(R.id.cardFiles);
-        CardView cardSchedule = view.findViewById(R.id.cardSchedule);
-        CardView cardGithub = view.findViewById(R.id.cardGithub);
-        CardView cardAI = view.findViewById(R.id.cardAI);
+        LinearLayout cardOpenAI = view.findViewById(R.id.cardOpenAI);
+        LinearLayout cardOpenPlanner = view.findViewById(R.id.cardOpenPlanner);
+        LinearLayout cardOpenHub = view.findViewById(R.id.cardOpenHub);
+        TextView txtOpenDeakinNews = view.findViewById(R.id.txtOpenDeakinNews);
+        webViewHomeNews = view.findViewById(R.id.webViewHomeNews);
 
-        cardCloudDeakin.setOnClickListener(v -> openFragment(DeakinFragment.newInstance("clouddeakin")));
-        cardDeakinSync.setOnClickListener(v -> openFragment(DeakinFragment.newInstance("deakinsync")));
-        cardStudentConnect.setOnClickListener(v -> openFragment(DeakinFragment.newInstance("studentconnect")));
-        cardOnTrack.setOnClickListener(v -> openFragment(DeakinFragment.newInstance("ontrack")));
-        cardTimetable.setOnClickListener(v -> openFragment(DeakinFragment.newInstance("timetable")));
-        cardFiles.setOnClickListener(v -> openFragment(new FilesFragment()));
-        cardSchedule.setOnClickListener(v -> openFragment(new ScheduleFragment()));
-        cardGithub.setOnClickListener(v -> openFragment(new GithubFragment()));
-        cardAI.setOnClickListener(v -> openFragment(new AIFragment()));
+        cardOpenAI.setOnClickListener(v -> openFragment(new AIFragment()));
+        cardOpenPlanner.setOnClickListener(v -> openFragment(new ScheduleFragment()));
+        cardOpenHub.setOnClickListener(v -> openFragment(new DeakinFragment()));
+
+        setupNewsWebView();
+
+        String deakinNewsUrl = "https://www.deakin.edu.au/about-deakin/news-and-media-releases";
+
+        webViewHomeNews.loadUrl(deakinNewsUrl);
+
+        txtOpenDeakinNews.setOnClickListener(v ->
+                openFragment(BrowserFragment.newInstance("Latest from Deakin", deakinNewsUrl))
+        );
 
         return view;
+    }
+
+    /**
+     * Loads Deakin public news section inside the Home screen.
+     */
+    @SuppressLint("SetJavaScriptEnabled")
+    private void setupNewsWebView() {
+        WebSettings settings = webViewHomeNews.getSettings();
+
+        settings.setJavaScriptEnabled(true);
+        settings.setDomStorageEnabled(true);
+        settings.setLoadWithOverviewMode(true);
+        settings.setUseWideViewPort(true);
+
+        webViewHomeNews.setWebViewClient(new WebViewClient());
     }
 
     private void openFragment(Fragment fragment) {
