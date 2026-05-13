@@ -14,9 +14,50 @@
         android:paddingTop="36dp"
         android:paddingBottom="20dp">
 
+        <!-- Top title row with information icon outside the gradient header -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Deakin OneAI"
+                android:textColor="@color/text_primary"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/btnInfoAbout"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:background="@drawable/bg_info_circle_light"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="i"
+                android:textColor="@color/primary_blue"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="AI-powered study, planning and Deakin productivity workspace."
+            android:textColor="@color/text_secondary"
+            android:textSize="15sp" />
+
+        <!-- Premium gradient hero card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
             android:background="@drawable/bg_gradient_header"
             android:orientation="vertical"
             android:padding="24dp">
@@ -26,13 +67,13 @@
                 android:layout_height="wrap_content"
                 android:text="Welcome to Deakin OneAI"
                 android:textColor="#FFFFFF"
-                android:textSize="30sp"
+                android:textSize="28sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="8dp"
                 android:text="Your AI-powered Deakin study workspace."
                 android:textColor="#E0E7FF"
                 android:textSize="16sp" />
@@ -47,6 +88,7 @@
 
         </LinearLayout>
 
+        <!-- AI quick actions -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -95,6 +137,7 @@
                     android:text="Summaries, explanations, checklists, study plans and flashcards powered by Gemini."
                     android:textColor="@color/text_secondary"
                     android:textSize="14sp" />
+
             </LinearLayout>
         </LinearLayout>
 
@@ -137,9 +180,55 @@
                     android:text="Use planner, due-date picker and structured milestones for assessment work."
                     android:textColor="@color/text_secondary"
                     android:textSize="14sp" />
+
             </LinearLayout>
         </LinearLayout>
 
+        <!-- Calendar shortcut since Calendar is now a main productivity feature -->
+        <LinearLayout
+            android:id="@+id/cardOpenCalendar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_resource_card"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:gravity="center"
+                android:text="🗓️"
+                android:textSize="26sp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Open Weekly Calendar"
+                    android:textColor="@color/primary_blue"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Add lectures, tutorials, meetings, assessments and study blocks."
+                    android:textColor="@color/text_secondary"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Productivity snapshot -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -160,7 +249,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Prototype readiness: 75%"
+                android:text="Prototype readiness: 85%"
                 android:textColor="@color/text_primary"
                 android:textSize="17sp"
                 android:textStyle="bold" />
@@ -171,13 +260,13 @@
                 android:layout_height="12dp"
                 android:layout_marginTop="12dp"
                 android:max="100"
-                android:progress="75" />
+                android:progress="85" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text="Remaining: Gemini testing, API 35/36 screenshots, final video and README."
+                android:text="Remaining: final screenshots, demo video, README polishing and GitHub submission evidence."
                 android:textColor="@color/text_secondary"
                 android:textSize="14sp" />
 
@@ -206,7 +295,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:text="Access Deakin services, GitHub, public resources and browser tools from one workspace."
+                android:text="Access Deakin services, STAR Timetable, GitHub, local files and browser tools from one workspace."
                 android:textColor="@color/info_text"
                 android:textSize="14sp" />
 

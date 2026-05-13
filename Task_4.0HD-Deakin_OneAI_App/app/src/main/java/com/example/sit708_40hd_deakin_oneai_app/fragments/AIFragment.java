@@ -3,6 +3,7 @@ package com.example.sit708_40hd_deakin_oneai_app.fragments;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
@@ -24,13 +25,18 @@ import com.example.sit708_40hd_deakin_oneai_app.R;
 import com.example.sit708_40hd_deakin_oneai_app.ai.GeminiService;
 
 /**
- * OneAI Studio screen.
+ * OneAI Studio
  *
- * Provides a user-friendly Gemini response view with:
- * - readable response card
- * - copy response action
- * - clear response action
- * - auto-scroll to generated answer
+ * Modernised GenAI interface using:
+ * - Prompt workspace
+ * - AI tool selector
+ * - Single generate action
+ * - Improved response card
+ * - Persistent selected-tool highlighting
+ *
+ * Industry-inspired UX:
+ * Similar interaction style to Microsoft Copilot,
+ * Gemini mobile apps, and ChatGPT mobile interfaces.
  */
 public class AIFragment extends Fragment {
 
@@ -42,7 +48,26 @@ public class AIFragment extends Fragment {
     private ScrollView aiRootScroll;
 
     private GeminiService geminiService;
+
     private String latestResponse = "";
+
+    /*
+     * Currently selected AI feature.
+     * ASK is selected by default when the screen opens.
+     */
+    private String selectedFeature = "ASK";
+    private String selectedTitle = "General Answer";
+
+    /*
+     * Tool selector buttons.
+     * Stored as fields so their styles can be reset/highlighted.
+     */
+    private Button btnAsk;
+    private Button btnSummarise;
+    private Button btnPlan;
+    private Button btnChecklist;
+    private Button btnExplain;
+    private Button btnFlashcards;
 
     public AIFragment() {
         // Required empty public constructor.
@@ -60,28 +85,53 @@ public class AIFragment extends Fragment {
 
         aiRootScroll = view.findViewById(R.id.aiRootScroll);
         inputPrompt = view.findViewById(R.id.inputPrompt);
+
         outputResponse = view.findViewById(R.id.outputResponse);
         txtResponseTitle = view.findViewById(R.id.txtResponseTitle);
         txtResponseMeta = view.findViewById(R.id.txtResponseMeta);
+
         progressGemini = view.findViewById(R.id.progressGemini);
 
-        Button btnAsk = view.findViewById(R.id.btnAsk);
-        Button btnSummarise = view.findViewById(R.id.btnSummarise);
-        Button btnPlan = view.findViewById(R.id.btnPlan);
-        Button btnChecklist = view.findViewById(R.id.btnChecklist);
-        Button btnExplain = view.findViewById(R.id.btnExplain);
-        Button btnFlashcards = view.findViewById(R.id.btnFlashcards);
+        /*
+         * AI tool selector buttons.
+         */
+        btnAsk = view.findViewById(R.id.btnAsk);
+        btnSummarise = view.findViewById(R.id.btnSummarise);
+        btnPlan = view.findViewById(R.id.btnPlan);
+        btnChecklist = view.findViewById(R.id.btnChecklist);
+        btnExplain = view.findViewById(R.id.btnExplain);
+        btnFlashcards = view.findViewById(R.id.btnFlashcards);
+
+        /*
+         * Main generation button.
+         */
+        Button btnGenerateAI = view.findViewById(R.id.btnGenerateAI);
+
         Button btnCopyResponse = view.findViewById(R.id.btnCopyResponse);
         Button btnClearResponse = view.findViewById(R.id.btnClearResponse);
 
         outputResponse.setMovementMethod(new ScrollingMovementMethod());
 
-        btnAsk.setOnClickListener(v -> runGemini("ASK", "General Answer"));
-        btnSummarise.setOnClickListener(v -> runGemini("SUMMARY", "Lesson Summary"));
-        btnPlan.setOnClickListener(v -> runGemini("PLAN", "Study Plan"));
-        btnChecklist.setOnClickListener(v -> runGemini("CHECKLIST", "Assignment Checklist"));
-        btnExplain.setOnClickListener(v -> runGemini("EXPLAIN", "Concept Explanation"));
-        btnFlashcards.setOnClickListener(v -> runGemini("FLASHCARDS", "Revision Flashcards"));
+        /*
+         * AI feature selections.
+         * The selected button remains visually highlighted.
+         */
+        btnAsk.setOnClickListener(v -> selectFeature("ASK", "General Answer", btnAsk));
+        btnSummarise.setOnClickListener(v -> selectFeature("SUMMARY", "Lesson Summary", btnSummarise));
+        btnPlan.setOnClickListener(v -> selectFeature("PLAN", "Study Plan", btnPlan));
+        btnChecklist.setOnClickListener(v -> selectFeature("CHECKLIST", "Assignment Checklist", btnChecklist));
+        btnExplain.setOnClickListener(v -> selectFeature("EXPLAIN", "Concept Explanation", btnExplain));
+        btnFlashcards.setOnClickListener(v -> selectFeature("FLASHCARDS", "Revision Flashcards", btnFlashcards));
+
+        /*
+         * Default tool selection when opening the OneAI screen.
+         */
+        selectFeature("ASK", "General Answer", btnAsk);
+
+        /*
+         * Main generate action.
+         */
+        btnGenerateAI.setOnClickListener(v -> runGemini());
 
         btnCopyResponse.setOnClickListener(v -> copyResponse());
         btnClearResponse.setOnClickListener(v -> clearResponse());
@@ -89,56 +139,118 @@ public class AIFragment extends Fragment {
         return view;
     }
 
-    private void runGemini(String featureType, String displayTitle) {
+    /**
+     * Stores selected AI feature and updates the selected-tool UI state.
+     *
+     * Default buttons stay blue, while the active tool becomes dark navy
+     * so users can clearly see which AI mode is selected.
+     */
+    private void selectFeature(String featureType, String title, Button selectedButton) {
+
+        selectedFeature = featureType;
+        selectedTitle = title;
+
+        resetToolButtonStyles();
+
+        selectedButton.setBackgroundColor(Color.parseColor("#0F172A"));
+        selectedButton.setTextColor(Color.WHITE);
+
+        txtResponseTitle.setText(title);
+        txtResponseMeta.setText("Selected tool: " + title);
+    }
+
+    /**
+     * Resets all tool selector buttons to the default blue state.
+     */
+    private void resetToolButtonStyles() {
+        int defaultBlue = Color.parseColor("#2563EB");
+
+        Button[] buttons = {
+                btnAsk,
+                btnSummarise,
+                btnPlan,
+                btnChecklist,
+                btnExplain,
+                btnFlashcards
+        };
+
+        for (Button button : buttons) {
+            button.setBackgroundColor(defaultBlue);
+            button.setTextColor(Color.WHITE);
+        }
+    }
+
+    /**
+     * Sends the user prompt to Gemini using the currently selected AI tool.
+     */
+    private void runGemini() {
 
         String prompt = inputPrompt.getText().toString().trim();
 
         if (TextUtils.isEmpty(prompt)) {
-            Toast.makeText(requireContext(), "Please enter a prompt first.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(
+                    requireContext(),
+                    "Please enter a prompt first.",
+                    Toast.LENGTH_SHORT
+            ).show();
             return;
         }
 
         progressGemini.setVisibility(View.VISIBLE);
-        txtResponseTitle.setText(displayTitle);
-        txtResponseMeta.setText("OneAI is thinking...");
-        outputResponse.setText("Generating a structured response. Please wait...");
+
+        txtResponseTitle.setText(selectedTitle);
+        txtResponseMeta.setText("OneAI is generating a response...");
+        outputResponse.setText("Generating academic response...");
 
         scrollToResponse();
 
-        geminiService.generateLearningResponse(featureType, prompt, new GeminiService.GeminiCallback() {
-            @Override
-            public void onSuccess(String result) {
-                progressGemini.setVisibility(View.GONE);
+        geminiService.generateLearningResponse(
+                selectedFeature,
+                prompt,
+                new GeminiService.GeminiCallback() {
 
-                latestResponse = cleanGeminiFormatting(result);
+                    @Override
+                    public void onSuccess(String result) {
 
-                txtResponseTitle.setText(displayTitle);
-                txtResponseMeta.setText("Generated by Gemini AI for academic support.");
-                outputResponse.setText(latestResponse);
+                        progressGemini.setVisibility(View.GONE);
 
-                scrollToResponse();
-            }
+                        latestResponse = cleanGeminiFormatting(result);
 
-            @Override
-            public void onError(String error) {
-                progressGemini.setVisibility(View.GONE);
+                        txtResponseTitle.setText(selectedTitle);
+                        txtResponseMeta.setText(
+                                "Generated using Gemini AI academic assistance."
+                        );
 
-                latestResponse = error;
+                        outputResponse.setText(latestResponse);
 
-                txtResponseTitle.setText("AI Response Error");
-                txtResponseMeta.setText("Check API key, internet access, or model availability.");
-                outputResponse.setText(error);
+                        scrollToResponse();
+                    }
 
-                scrollToResponse();
-            }
-        });
+                    @Override
+                    public void onError(String error) {
+
+                        progressGemini.setVisibility(View.GONE);
+
+                        latestResponse = error;
+
+                        txtResponseTitle.setText("Generation Error");
+                        txtResponseMeta.setText(
+                                "Check API key, internet connection or Gemini availability."
+                        );
+
+                        outputResponse.setText(error);
+
+                        scrollToResponse();
+                    }
+                });
     }
 
     /**
-     * Makes Gemini output easier to read inside a TextView.
-     * This removes heavy markdown symbols while keeping structure.
+     * Cleans markdown formatting from Gemini responses to make the
+     * result easier to read inside a normal Android TextView.
      */
     private String cleanGeminiFormatting(String text) {
+
         if (text == null) {
             return "";
         }
@@ -152,30 +264,63 @@ public class AIFragment extends Fragment {
                 .trim();
     }
 
+    /**
+     * Copies the latest AI response to the Android clipboard.
+     */
     private void copyResponse() {
+
         if (TextUtils.isEmpty(latestResponse)) {
-            Toast.makeText(requireContext(), "No response to copy.", Toast.LENGTH_SHORT).show();
+
+            Toast.makeText(
+                    requireContext(),
+                    "No response to copy.",
+                    Toast.LENGTH_SHORT
+            ).show();
+
             return;
         }
 
         ClipboardManager clipboardManager =
-                (ClipboardManager) requireContext().getSystemService(Context.CLIPBOARD_SERVICE);
+                (ClipboardManager) requireContext()
+                        .getSystemService(Context.CLIPBOARD_SERVICE);
 
-        ClipData clipData = ClipData.newPlainText("OneAI Response", latestResponse);
+        ClipData clipData =
+                ClipData.newPlainText("OneAI Response", latestResponse);
+
         clipboardManager.setPrimaryClip(clipData);
 
-        Toast.makeText(requireContext(), "Response copied.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(
+                requireContext(),
+                "Response copied.",
+                Toast.LENGTH_SHORT
+        ).show();
     }
 
+    /**
+     * Clears current response card and resets the visible response text.
+     * The selected AI tool remains selected.
+     */
     private void clearResponse() {
+
         latestResponse = "";
-        txtResponseTitle.setText("OneAI Response");
-        txtResponseMeta.setText("Gemini output will appear below.");
-        outputResponse.setText("Start by entering a prompt and selecting one of the AI tools above.");
+
+        txtResponseTitle.setText(selectedTitle);
+        txtResponseMeta.setText("Selected tool: " + selectedTitle);
+
+        outputResponse.setText(
+                "Start by entering a prompt and selecting an AI tool."
+        );
     }
 
+    /**
+     * Smoothly scrolls to the response section.
+     */
     private void scrollToResponse() {
+
         aiRootScroll.postDelayed(() ->
-                aiRootScroll.smoothScrollTo(0, outputResponse.getTop()), 250);
+                aiRootScroll.smoothScrollTo(
+                        0,
+                        outputResponse.getTop()
+                ), 250);
     }
 }

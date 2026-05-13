@@ -67,18 +67,18 @@
             android:textSize="15sp" />
 
         <Button
-            android:id="@+id/btnPickDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Pick Due Date" />
-
-        <Button
             android:id="@+id/btnGeneratePlan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Generate Local Study Plan" />
+
+        <Button
+            android:id="@+id/btnGenerateAIPlan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Generate AI Study Plan" />
 
         <TextView
             android:id="@+id/txtGeneratedPlan"

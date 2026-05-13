@@ -15,15 +15,16 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
-        android:layout_height="72dp"
+        android:layout_height="64dp"
         android:layout_marginStart="12dp"
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/bg_bottom_nav"
         android:elevation="10dp"
+        app:itemHorizontalTranslationEnabled="false"
+        app:itemIconSize="26dp"
         app:itemIconTint="@color/primary_blue"
-        app:itemTextColor="@color/primary_blue"
-        app:labelVisibilityMode="labeled"
+        app:labelVisibilityMode="unlabeled"
         app:menu="@menu/bottom_menu" />
 
 </LinearLayout>

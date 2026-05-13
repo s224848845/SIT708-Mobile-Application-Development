@@ -15,6 +15,7 @@
         android:paddingTop="36dp"
         android:paddingBottom="20dp">
 
+        <!-- Header -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,77 +28,161 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:text="Gemini-powered study tools for summaries, explanations, planning, checklists, and flashcards."
+            android:text="Gemini-powered academic assistant for study support, planning, summaries and revision."
             android:textColor="@color/text_secondary"
             android:textSize="15sp" />
 
-        <TextView
+        <!-- Privacy Notice -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
             android:background="@drawable/bg_info_card"
-            android:padding="14dp"
-            android:text="Privacy Notice: This prototype uses Gemini API in hybrid mode. Do not enter passwords, student ID numbers, private documents, medical details, or sensitive personal data."
-            android:textColor="@color/info_text"
-            android:textSize="14sp" />
+            android:orientation="horizontal"
+            android:padding="14dp">
 
-        <EditText
-            android:id="@+id/inputPrompt"
+            <TextView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:gravity="top"
+                android:text="🔒"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Privacy Notice: This prototype uses Gemini API in hybrid mode. Avoid entering passwords, student IDs, medical details, or sensitive information."
+                android:textColor="@color/info_text"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <!-- Prompt Card -->
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
-            android:background="@drawable/bg_input"
-            android:gravity="top"
-            android:hint="Paste lecture notes, assignment topic, or ask a study question..."
-            android:inputType="textMultiLine"
-            android:minHeight="150dp"
-            android:padding="16dp"
+            android:background="@drawable/bg_card"
+            android:orientation="vertical"
+            android:padding="18dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Academic Prompt"
+                android:textColor="@color/text_primary"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/inputPrompt"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_input"
+                android:gravity="top"
+                android:hint="Paste lecture notes, assignment topics, coding questions or study requests..."
+                android:inputType="textMultiLine"
+                android:minHeight="160dp"
+                android:padding="16dp"
+                android:textColor="@color/text_primary"
+                android:textColorHint="#9CA3AF"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <!-- AI Tool Selection -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:text="Select AI Tool"
             android:textColor="@color/text_primary"
-            android:textColorHint="#9CA3AF"
-            android:textSize="16sp" />
+            android:textSize="19sp"
+            android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/btnAsk"
+        <!-- Row 1 -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            android:text="Ask OneAI" />
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btnSummarise"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Summarise Lesson" />
+            <Button
+                android:id="@+id/btnAsk"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Ask" />
 
-        <Button
-            android:id="@+id/btnPlan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Generate Study Plan" />
+            <Button
+                android:id="@+id/btnSummarise"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:text="Summary" />
 
-        <Button
-            android:id="@+id/btnChecklist"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Create Assignment Checklist" />
+        </LinearLayout>
 
-        <Button
-            android:id="@+id/btnExplain"
+        <!-- Row 2 -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Explain Concept Simply" />
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btnFlashcards"
+            <Button
+                android:id="@+id/btnPlan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Plan" />
+
+            <Button
+                android:id="@+id/btnChecklist"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:text="Checklist" />
+
+        </LinearLayout>
+
+        <!-- Row 3 -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Create Revision Flashcards" />
+            android:orientation="horizontal">
 
+            <Button
+                android:id="@+id/btnExplain"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Explain" />
+
+            <Button
+                android:id="@+id/btnFlashcards"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:text="Flashcards" />
+
+        </LinearLayout>
+
+        <!-- Main Generate Button -->
+        <Button
+            android:id="@+id/btnGenerateAI"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="Generate with OneAI" />
+
+        <!-- Progress -->
         <ProgressBar
             android:id="@+id/progressGemini"
             android:layout_width="wrap_content"
@@ -106,7 +191,7 @@
             android:layout_marginTop="18dp"
             android:visibility="gone" />
 
-        <!-- Improved AI Response Card -->
+        <!-- AI Response -->
         <LinearLayout
             android:id="@+id/responseCard"
             android:layout_width="match_parent"
@@ -140,11 +225,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
                 android:lineSpacingExtra="5dp"
-                android:text="Start by entering a prompt and selecting one of the AI tools above."
+                android:text="Start by entering a prompt and selecting an AI tool."
                 android:textColor="@color/text_primary"
                 android:textIsSelectable="true"
                 android:textSize="15sp" />
 
+            <!-- Response Actions -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
