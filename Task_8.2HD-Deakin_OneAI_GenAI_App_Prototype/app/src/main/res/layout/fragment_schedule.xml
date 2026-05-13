@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/screen_background"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="36dp"
+        android:paddingBottom="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Study Planner"
+            android:textColor="@color/text_primary"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Create a structured study and assignment plan with a selectable due date."
+            android:textColor="@color/text_secondary"
+            android:textSize="15sp" />
+
+        <EditText
+            android:id="@+id/inputUnitName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_input"
+            android:hint="Unit name, e.g., SIT708 Mobile App Development"
+            android:padding="16dp"
+            android:textColor="@color/text_primary"
+            android:textColorHint="#9CA3AF"
+            android:textSize="15sp" />
+
+        <EditText
+            android:id="@+id/inputTaskName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_input"
+            android:hint="Task name, e.g., 8.2HD GenAI App Prototype"
+            android:padding="16dp"
+            android:textColor="@color/text_primary"
+            android:textColorHint="#9CA3AF"
+            android:textSize="15sp" />
+
+        <!-- Due date is selected using DatePickerDialog instead of manual typing. -->
+        <TextView
+            android:id="@+id/txtSelectedDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_input"
+            android:padding="16dp"
+            android:text="Select due date"
+            android:textColor="#9CA3AF"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/btnGeneratePlan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Generate Local Study Plan" />
+
+        <Button
+            android:id="@+id/btnGenerateAIPlan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Generate AI Study Plan" />
+
+        <TextView
+            android:id="@+id/txtGeneratedPlan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/bg_card"
+            android:padding="18dp"
+            android:text="Your generated plan will appear here."
+            android:textColor="@color/text_primary"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/bg_info_card"
+            android:padding="14dp"
+            android:textColor="@color/info_text"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+</ScrollView>

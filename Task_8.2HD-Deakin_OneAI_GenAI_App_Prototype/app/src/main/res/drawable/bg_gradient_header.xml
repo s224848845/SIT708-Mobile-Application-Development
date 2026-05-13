@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Premium hero card gradient for dashboard sections. -->
+    <gradient
+        android:startColor="#2563EB"
+        android:endColor="#7C3AED"
+        android:angle="135" />
+
+    <corners android:radius="26dp" />
+
+</shape>

@@ -1,0 +1,33 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Checklist lines -->
+    <path
+        android:fillColor="#2962FF"
+        android:pathData="M10,6h9v2h-9z" />
+
+    <path
+        android:fillColor="#2962FF"
+        android:pathData="M10,11h9v2h-9z" />
+
+    <path
+        android:fillColor="#2962FF"
+        android:pathData="M10,16h9v2h-9z" />
+
+    <!-- Check marks -->
+    <path
+        android:fillColor="#2962FF"
+        android:pathData="M5.5,7.5l-1.5,-1.5 -1,1 2.5,2.5 4,-4 -1,-1z" />
+
+    <path
+        android:fillColor="#2962FF"
+        android:pathData="M5.5,12.5l-1.5,-1.5 -1,1 2.5,2.5 4,-4 -1,-1z" />
+
+    <path
+        android:fillColor="#2962FF"
+        android:pathData="M5.5,17.5l-1.5,-1.5 -1,1 2.5,2.5 4,-4 -1,-1z" />
+
+</vector>

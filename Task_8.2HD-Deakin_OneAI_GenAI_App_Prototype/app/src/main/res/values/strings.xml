@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Deakin OneAI</string>
+
+    <string name="home_title">Deakin OneAI</string>
+    <string name="home_subtitle">AI-powered student productivity assistant</string>
+
+    <string name="ai_title">OneAI Studio</string>
+    <string name="planner_title">Study Planner</string>
+    <string name="deakin_title">Deakin Hub</string>
+    <string name="about_title">About</string>
+</resources>

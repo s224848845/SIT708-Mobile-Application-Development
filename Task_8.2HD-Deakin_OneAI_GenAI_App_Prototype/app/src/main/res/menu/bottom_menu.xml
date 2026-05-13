@@ -1,0 +1,28 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_home"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/nav_ai"
+        android:icon="@drawable/ic_ai"
+        android:title="OneAI" />
+
+    <item
+        android:id="@+id/nav_schedule"
+        android:icon="@drawable/ic_planner"
+        android:title="Planner" />
+
+    <item
+        android:id="@+id/nav_deakin"
+        android:icon="@drawable/ic_school"
+        android:title="Hub" />
+
+    <item
+        android:id="@+id/nav_calendar"
+        android:icon="@drawable/ic_calendar"
+        android:title="Calendar" />
+
+</menu>
