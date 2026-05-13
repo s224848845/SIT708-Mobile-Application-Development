@@ -1,20 +1,20 @@
 # Deakin OneAI – Gemini-Powered Android Learning Assistant
 
-## SIT708 8.2HD Android GenAI App Prototype Implementation and Presentation
+## SIT708 – 8.2HD Android GenAI App Prototype
 
-Deakin OneAI is a modern Android mobile application prototype developed for SIT708 Mobile Application Development. The application integrates Google Gemini AI into an Android study assistant platform designed to support Deakin University students with academic productivity, study planning, AI-assisted learning, file organisation, calendar planning, browser access, and Deakin student service integration.
+Deakin OneAI is a modern Android mobile application prototype developed for SIT708 Mobile Application Development. The application integrates Google Gemini AI into an Android study assistant platform designed to support Deakin University students with academic productivity, study planning, AI-assisted learning, browser-based research, calendar scheduling, file organisation, and Deakin student service access.
 
-This project extends the original 4.0HD Deakin OneAI prototype into a more advanced 8.2HD implementation. The updated version includes a premium UI redesign, Gemini-powered learning utilities, Deakin Hub integration, local academic calendar tools, file workspace support, and a browser workspace.
+The application combines productivity tools, AI learning utilities, and university resources into a single Android workspace while following modern mobile UI/UX principles.
 
 ---
 
-## Key Features
+# Application Features
 
-### 1. OneAI Studio
+## ✨ OneAI Studio
 
-OneAI Studio is the main AI-powered learning area of the app. It uses Gemini AI to support academic learning tasks.
+OneAI Studio is the primary AI-powered learning environment inside the app. It integrates Google Gemini AI to support academic productivity and learning workflows.
 
-Supported AI features include:
+### Supported AI Utilities
 
 - Ask academic questions
 - Summarise lecture notes
@@ -23,124 +23,78 @@ Supported AI features include:
 - Explain difficult concepts
 - Generate revision flashcards
 
-The AI response section includes a user-friendly response card, readable output formatting, copy response support, clear response support, and loading feedback.
+### OneAI Features
+
+- Academic prompt workspace
+- AI tool selector interface
+- Persistent selected-tool highlighting
+- Gemini response generation
+- Response formatting cleanup
+- Copy response support
+- Clear response support
+- Loading progress indicator
+- Privacy and safety notice
 
 ---
 
-### 2. Home Dashboard
+## 🏠 Home Dashboard
 
-The Home screen acts as the main productivity dashboard.
+The Home screen acts as the central productivity dashboard for the application.
 
-Features include:
+### Features
 
-- Gradient welcome section
+- Welcome productivity dashboard
 - AI quick action cards
 - Study planner shortcut
-- Productivity snapshot
-- Prototype readiness progress bar
+- Weekly calendar shortcut
 - Deakin Hub shortcut
-- Embedded Deakin news access
+- Productivity readiness section
+- Embedded Deakin news preview
+- Information popup access
 
 ---
 
-### 3. Study Planner
+## 📋 Study Planner
 
-The Study Planner helps students prepare structured plans for assignments and weekly tasks.
+The Study Planner supports structured academic task preparation and assignment management.
 
-Features include:
+### Features
 
 - Unit name input
 - Task name input
 - Native Android date picker
 - Local study plan generation
-- Structured assessment milestone support
+- Structured milestone workflow
+- Assignment preparation guidance
+- Academic planning support
 
-Example use cases:
+### Example Use Cases
 
 - Assignment planning
-- Weekly workload planning
+- Weekly workload preparation
 - Demo preparation
-- Assessment deadline tracking
+- Assessment tracking
 
 ---
 
-### 4. Deakin Hub
+## 📅 Weekly Calendar
 
-Deakin Hub provides access to Deakin student services and productivity tools from one workspace.
+The Weekly Calendar provides a Teams-style academic scheduling workflow.
 
-Deakin Resources:
+### Features
 
-- CloudDeakin
-- OnTrack
-- StudentConnect
-- DeakinSync
-- STAR Timetable
-
-Developer Workspace:
-
-- GitHub Workspace
-- Browser Workspace
-- Local Study Files
-
-Productivity Tools:
-
-- Weekly Calendar
-
-All resources are opened inside the app using an embedded browser workflow for prototype consistency.
-
----
-
-### 5. Browser Workspace
-
-The Browser Workspace provides an in-app web browsing feature.
-
-Features include:
-
-- URL input
-- Google search support
-- Back navigation
-- Reload support
-- Open current page in Chrome
-- Public academic resource browsing
-
----
-
-### 6. Local Study Files
-
-The Local Study Files section simulates an academic file management workflow.
-
-Features include:
-
-- Simulated academic file upload
-- Sample file list
-- File tools overview
-- Future support for AI summarisation of uploaded notes
-
-Planned future improvements:
-
-- Android Storage Access Framework integration
-- PDF parsing
-- Gemini document summarisation
-- Cloud storage support
-- Firebase file sync
-
----
-
-### 7. Weekly Calendar
-
-The Weekly Calendar provides a Microsoft Teams-style academic calendar workflow.
-
-Features include:
-
-- Preloaded sample academic events
-- Add new calendar events
+- Add custom calendar events
+- Persistent local event storage
 - Date picker integration
 - Time picker integration
-- Event type selection
+- Event category selection
+- Event templates
+- Reminder support
+- Online session toggle
 - Dynamic event cards
 - Reset sample events option
 
-Supported event types:
+### Supported Event Types
 
 - Lecture
 - Workshop
@@ -149,120 +103,201 @@ Supported event types:
 - Assessment
 - Meeting
 
-Planned future improvements:
+### Event Templates
 
-- STAR Timetable sync
-- Google Calendar API integration
-- Microsoft Teams calendar sync
-- Reminder notifications
-- Firebase calendar storage
-
----
-
-## Gemini AI Integration
-
-The app uses Gemini AI in a hybrid mobile and cloud architecture.
-
-### Integration Mode
-
-Hybrid mode:
-
-- Android app provides the mobile interface
-- User prompt is entered inside the app
-- Prompt is sent to Gemini API
-- Gemini response is displayed inside OneAI Studio
-
-### AI Use Cases
-
-Gemini is used for learning-focused utilities, not only general chat. The AI features are designed to improve the student learning workflow by supporting summarisation, planning, explanation, checklist generation, and revision preparation.
+- SIT708 lecture
+- Mobile app workshop
+- Assessment preparation
+- Gemini AI testing
+- Demo recording session
 
 ---
 
-## Privacy and Safety
+## 🎓 Deakin Hub
 
-The app includes privacy and safety handling to support responsible AI use.
+The Deakin Hub provides access to student productivity resources and academic services inside the app.
 
-### Privacy Notice
+### Deakin Resources
 
-The app warns users not to enter:
+- CloudDeakin
+- OnTrack
+- StudentConnect
+- DeakinSync
+- STAR Timetable
+
+### Productivity Workspace
+
+- Browser Workspace
+- GitHub Workspace
+- Local Study Files
+- Weekly Calendar
+
+All resources are opened inside the application using embedded browser workflows for consistent navigation.
+
+---
+
+## 🌐 Browser Workspace
+
+The Browser Workspace provides in-app browsing support for academic resources and productivity websites.
+
+### Features
+
+- URL input
+- Google search support
+- Back navigation
+- Reload support
+- Embedded browsing
+- Open current page externally if required
+
+---
+
+## 📁 Local Study Files
+
+The Local Study Files section simulates a student file management workflow.
+
+### Features
+
+- Simulated file upload
+- Academic file list
+- Local workspace interface
+- File management preview workflow
+
+### Planned Future Support
+
+- Android Storage Access Framework
+- PDF parsing
+- Gemini document summarisation
+- Cloud storage integration
+- Firebase file sync
+
+---
+
+# Gemini AI Integration
+
+The application uses Google Gemini AI in a hybrid mobile-cloud architecture.
+
+## Gemini Workflow
+
+- User enters prompt inside OneAI Studio
+- Prompt is processed through Gemini API
+- AI response is returned inside the Android app
+- Output is formatted for mobile readability
+
+## AI Use Cases
+
+Gemini AI is used for learning-focused utilities rather than general conversation only.
+
+Supported learning workflows include:
+
+- Lesson summarisation
+- Assignment planning
+- Checklist generation
+- Concept explanation
+- Flashcard generation
+- Academic assistance
+
+---
+
+# Privacy and Safety
+
+The application includes privacy and safety handling for responsible AI usage.
+
+## Privacy Notice
+
+Users are advised not to enter:
 
 - Passwords
-- Student ID numbers
-- Private documents
+- Student IDs
 - Medical information
+- Private documents
 - Sensitive personal data
 
-### Safety Handling
+## Safety Handling
 
-Unsafe prompts are checked locally before being sent to Gemini. Prompts related to malware, phishing, credential theft, bypassing login systems, illegal activity, or exploit instructions are rejected with a safety notice.
+Unsafe prompts related to:
+
+- Malware
+- Credential theft
+- Phishing
+- Illegal activity
+- Exploit instructions
+
+are rejected locally before sending requests to Gemini AI.
 
 ---
 
-## Android Compatibility
+# Android Compatibility
 
-The app is designed for modern Android compatibility.
+The application is designed for modern Android compatibility.
 
-Recommended testing:
+## Recommended Testing
 
-- API 35 emulator or device
-- API 36 emulator or device
+- Android API 35
+- Android API 36
 
-Compatibility features:
+## Android Features Used
 
-- Modern Fragment-based navigation
+- Fragment navigation
 - BottomNavigationView
-- WebView support
-- Android date picker
-- Android time picker
-- Android 16-compatible back navigation approach using OnBackPressedDispatcher
+- WebView
+- SharedPreferences
+- ScrollView
+- DatePickerDialog
+- TimePickerDialog
+- AlertDialog
+- OnBackPressedDispatcher
 
 ---
 
-## UI and UX Improvements
+# User Interface Design
 
-The UI was redesigned to create a more polished HD-level prototype.
+The application follows a modern Android productivity-focused UI structure.
 
-Design improvements include:
+## UI Characteristics
 
-- Premium gradient header
+- Premium gradient dashboard
 - Rounded modern cards
-- Consistent spacing
-- Floating bottom navigation style
+- Floating bottom navigation
+- Icon-only navigation system
 - Improved typography hierarchy
-- Scrollable layouts
-- Icon-based cards
-- Improved AI response display
-- User-friendly Hub structure
+- Responsive layouts
+- Scrollable workspace design
+- Embedded productivity widgets
 - Teams-style calendar interface
 
 ---
 
-## Technologies Used
+# Technologies Used
 
-Android development:
+## Android Development
 
 - Java
 - Android Studio
 - Android SDK
+- XML Layouts
 - Fragments
 - Material Components
+
+## Android Components
+
 - BottomNavigationView
-- ScrollView
 - WebView
+- ScrollView
+- SharedPreferences
+- AlertDialog
 - DatePickerDialog
 - TimePickerDialog
-- AlertDialog
 
-AI and networking:
+## AI Integration
 
 - Google Gemini API
-- JSON request and response handling
 - HTTP networking
-- Prompt safety handling
+- JSON request/response handling
+- Prompt safety validation
 
 ---
 
-## Project Structure
+# Project Structure
 
 ```text
 app/
@@ -270,7 +305,6 @@ app/
     └── main/
         ├── java/
         │   └── com/example/sit708_40hd_deakin_oneai_app/
-        │       ├── adapters/
         │       ├── ai/
         │       │   └── GeminiService.java
         │       ├── fragments/
@@ -283,8 +317,6 @@ app/
         │       │   ├── GithubFragment.java
         │       │   ├── HomeFragment.java
         │       │   └── ScheduleFragment.java
-        │       ├── models/
-        │       ├── utils/
         │       └── MainActivity.java
         │
         └── res/
@@ -293,9 +325,10 @@ app/
             ├── menu/
             ├── values/
             └── xml/
-
 ```
+
 ---
+
 # Setup Instructions
 
 ## 1. Open Project
@@ -308,18 +341,19 @@ Open the project folder in Android Studio.
 
 Add the Gemini API key according to the current project configuration.
 
-If the app uses `local.properties`, add:
+If using `local.properties`, add:
 
+```properties
 GEMINI_API_KEY=PASTE_YOUR_GEMINI_API_KEY_HERE
+```
 
-
-Do not commit the real API key to GitHub.
+Do not commit real API keys to GitHub.
 
 ---
 
 ## 3. Sync Gradle
 
-In Android Studio, select:
+In Android Studio:
 
 ```text
 File > Sync Project with Gradle Files
@@ -327,34 +361,35 @@ File > Sync Project with Gradle Files
 
 ---
 
-## 4. Run the App
+## 4. Run the Application
 
-Run the app using:
+Run using:
 
-- Android emulator
-- Physical Android device
+- Android Emulator
+- Physical Android Device
 
-Recommended emulator versions:
+### Recommended Versions
 
 - API 35
 - API 36
 
 ---
 
-# Suggested Demo Flow
+# Suggested Demonstration Flow
 
-1. Open the app and show the Home dashboard.
-2. Explain the premium UI redesign and productivity dashboard.
+1. Open the Home Dashboard.
+2. Explain productivity workflow and navigation.
 3. Open OneAI Studio.
-4. Enter an academic prompt and generate a Gemini response.
-5. Demonstrate copy and clear response buttons.
-6. Open Study Planner and generate a local study plan using the date picker.
-7. Open Deakin Hub and show Deakin Resources.
-8. Open STAR Timetable from Deakin Hub.
-9. Open Browser Workspace and search for an academic resource.
-10. Open Local Study Files and simulate file upload.
-11. Open Weekly Calendar and add a new event using date and time pickers.
-12. Open About screen and explain privacy, safety, compatibility, and future work.
+4. Enter academic prompt and select AI tool.
+5. Generate Gemini AI response.
+6. Demonstrate copy and clear response functions.
+7. Open Study Planner and generate a study plan.
+8. Open Weekly Calendar and add a new event.
+9. Restart the app and demonstrate persistent calendar storage.
+10. Open Deakin Hub resources.
+11. Open Browser Workspace.
+12. Open Local Study Files.
+13. Explain privacy and AI safety handling.
 
 ---
 
@@ -382,37 +417,57 @@ Generate five flashcards about Android WebView and mobile security.
 
 ---
 
-# Development Evidence
+# Application Capabilities
 
-The application demonstrates iterative development through:
+The application demonstrates:
 
-- Original 4.0HD prototype extension
-- Premium UI redesign
-- Gemini API integration
-- Deakin Hub expansion
-- Browser workspace implementation
-- Local study files module
-- Weekly calendar implementation
-- API 35 and API 36 emulator testing
-- Git branch-based development workflow
+- Android fragment navigation
+- Gemini AI integration
+- Academic productivity workflows
+- Local persistent storage
+- Browser-based learning tools
+- Student service integration
+- Mobile AI-assisted study support
+- Modern Android UI workflows
 
 ---
 
-# Future Work
+# Future Enhancements
 
-Future improvements include:
+## AI & Productivity
 
-- Real Deakin authentication integration
-- Secure SSO-based login flow
-- STAR Timetable data sync
-- Google Calendar API support
-- Microsoft Teams calendar integration
+- STAR Timetable synchronisation
+- Google Calendar integration
+- Microsoft Teams integration
+- AI-generated reminders
+- AI calendar scheduling
+
+## Cloud Features
+
 - Firebase Authentication
-- Firebase Firestore storage
-- Cloud file upload
-- PDF text extraction
-- Gemini-powered document summarisation
-- Offline AI model support
-- Push notification reminders
-- Accessibility testing
-- UI testing and unit testing
+- Firebase Firestore
+- Cloud file storage
+- Cross-device sync
+
+## AI Enhancements
+
+- PDF summarisation
+- Lecture note analysis
+- Voice prompts
+- Offline AI support
+
+---
+
+# Compatibility
+
+Tested on:
+
+- Android API 35
+- Android API 36
+
+Compatible with:
+
+- Android Emulator
+- Physical Android Devices
+
+---
