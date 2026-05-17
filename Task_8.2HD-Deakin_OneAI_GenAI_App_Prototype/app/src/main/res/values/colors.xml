@@ -1,0 +1,18 @@
+<resources>
+    <!-- Main brand colours for a clean modern Deakin-inspired UI. -->
+    <color name="primary_blue">#2563EB</color>
+    <color name="primary_dark">#1E3A8A</color>
+    <color name="accent_green">#10B981</color>
+
+    <!-- Background and text colours. -->
+    <color name="screen_background">#F5F7FB</color>
+    <color name="card_background">#FFFFFF</color>
+    <color name="text_primary">#111827</color>
+    <color name="text_secondary">#6B7280</color>
+
+    <!-- Status colours used for privacy, warning, and compatibility cards. -->
+    <color name="info_blue">#E0F2FE</color>
+    <color name="info_text">#075985</color>
+    <color name="warning_background">#FEF3C7</color>
+    <color name="warning_text">#92400E</color>
+</resources>
