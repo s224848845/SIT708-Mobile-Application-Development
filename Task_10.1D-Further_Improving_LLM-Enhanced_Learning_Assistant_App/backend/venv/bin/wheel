@@ -1,0 +1,10 @@
+#!/bin/sh
+'''exec' "/Users/ashanindika/Deakin - Master of IT/2026_T1/SIT708 - Mobile Application Development/OnTrack-SCM/SIT708-Mobile-Application-Development/Task_6.1D_LLM-Enhanced_Learning_Assistant_App/backend/venv/bin/python" "$0" "$@"
+' '''
+# -*- coding: utf-8 -*-
+import re
+import sys
+from wheel._commands import main
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
+    sys.exit(main())

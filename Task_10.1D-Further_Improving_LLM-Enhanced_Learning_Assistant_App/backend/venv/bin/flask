@@ -1,0 +1,8 @@
+#!/bin/sh
+'''exec' "/Users/ashanindika/Deakin - Master of IT/2026_T1/SIT708 - Mobile Application Development/OnTrack-SCM/SIT708-Mobile-Application-Development/Task_6.1D_LLM-Enhanced_Learning_Assistant_App/backend/venv/bin/python" "$0" "$@"
+' '''
+import sys
+from flask.cli import main
+if __name__ == '__main__':
+    sys.argv[0] = sys.argv[0].removesuffix('.exe')
+    sys.exit(main())
