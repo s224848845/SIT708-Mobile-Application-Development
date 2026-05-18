@@ -28,11 +28,6 @@ import com.example.sit708_40hd_deakin_oneai_app.R;
  * - Deakin Hub shortcut
  * - About information popup
  * - Embedded Deakin latest news preview
- *
- * HD UX improvement:
- * The About section has been moved away from the bottom navigation.
- * It is now opened as a popup dialog from the top-right information icon.
- * This keeps the bottom navigation focused on core productivity features.
  */
 public class HomeFragment extends Fragment {
 
