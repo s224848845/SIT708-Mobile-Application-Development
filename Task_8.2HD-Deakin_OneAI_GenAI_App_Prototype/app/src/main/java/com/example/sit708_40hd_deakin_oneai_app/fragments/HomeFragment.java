@@ -110,9 +110,6 @@ public class HomeFragment extends Fragment {
 
     /**
      * Shows app information as a popup dialog.
-     *
-     * This replaces the previous About bottom-tab screen and keeps the main
-     * navigation focused on active user tasks: Home, AI, Planner, Calendar, and Hub.
      */
     private void showAboutDialog() {
         String message =
@@ -138,9 +135,6 @@ public class HomeFragment extends Fragment {
 
     /**
      * Opens a new Fragment inside the app and adds it to the back stack.
-     *
-     * This allows users to press Back and return to the previous Home screen,
-     * creating a smoother mobile navigation experience.
      */
     private void openFragment(Fragment fragment) {
         requireActivity().getSupportFragmentManager()
